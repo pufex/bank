@@ -5,21 +5,25 @@ var permission = 0, client = {};
 function register(){
     alert("Rozpoczyna się procedura rejestracji. ");
 
-    var firstName = prompt("Wprowadź swoje imię. ");
-    var secondName = prompt("Wprowadź swoje drugie imię (opcjonalnie): ");
-    var surname = prompt("Wprowadź swoje nazwisko: ");
-    var email = prompt("Wprowadź adres email: ");
-    var password = prompt("Wprowadź nowe hasło");
+    client.firstName = prompt("Wprowadź swoje imię. ");
+    client.secondName = prompt("Wprowadź swoje drugie imię (opcjonalnie): ");
+    client.surname = prompt("Wprowadź swoje nazwisko: ");
+    client.email = prompt("Wprowadź adres email: ");
+    client.password = prompt("Wprowadź nowe hasło: ");
+    client.pin = prompt("Wprowadź nowy numer PIN: ");
 
     alert("Rejestracja przebiegła pomyślnie. ");
-    client.firstName = firstName;
-    client.secondName = secondName;
-    client.surname = surname;
-    client.email = email;
-    client.password = password;
-    client.balance = 0;
-
     return;
+}
+
+function enterPIN(){
+    var pinInput = prompt("Wprowadź numer PIN: ");
+    if(pinInput === client.pin){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 function debtReminder(){
@@ -67,12 +71,22 @@ function transfer(){
     var title = prompt("Wprowadź tytuł przelewu: ");
     var amount = Number(prompt("Wprowadź kwotę przelewu: "));
 
+    if(amount > 0 || amount){}else
+    {
+        alert("Wprowadzona kwota jest nieprawidłowa.");
+        return;
+    }
+
     if(confirm(`Numer konta: ${code}, Tytuł przelewu: ${title}, Kwota: ${amount}.`) === false){
         alert("Przelew anulowano.");
         return;
     }
 
-    client.balance = client.balance - amount;
+    if(enterPIN() === false){
+        alert("Wprowadzony numer PIN jest nieprawidłowy.")
+    }
+
+    client.balance = client.balance - Math.abs(amount);
     alert("Pomyślnie dokonano przelewu! ");
     
     debtReminder();
@@ -113,23 +127,15 @@ function credit(){
         return;
     }
 
-    client.balance = client.balance + amount;
+    if(enterPIN() === false){
+        alert("Wprowadzony numer PIN jest nieprawidłowy.")
+    }
+
+    client.balance = client.balance + Math.abs(amount);
     alert(`Dokonano kredytu na ${amount}. Pamiętaj by go spłacić w czasie. Obecnie saldo konta wynosi ${client.balance}.`);
     debtReminder();
     return;
 
 }
-
-// alert("Witaj w banku! Za chwilę rozpocznie się procedura rejestracji. "); 
-// client = register();
-// alert("Zaloguj się!");
-// login(); 
-// alert("Dokonaj przelewu! ");
-// transfer();
-// alert("Dokonaj kredytu. ");
-// credit();
-// alert("No to się zalogowałeś. ");
-// logout();
-
 
 

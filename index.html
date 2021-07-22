@@ -5,9 +5,88 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bank</title>
+    <style>
+
+        html, body{
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: black;
+            font-family: sans-serif;
+            font-size: 16px;
+            color: white;
+        }
+
+        .area{
+            display: block;
+
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+
+            box-sizing: border-box;
+            padding: 1rem;
+        }
+
+        .area__header, .area__paragraph, .area__ul{
+            font-family: sans-serif;
+            margin: 0 0 1rem 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .area__header{
+            font-size: 2rem;
+            text-align: center;
+            color: burlywood;
+        }     
+
+        .area__paragraph{
+            font-size: 1rem;
+            color: white;
+        }
+
+        .area__ul{
+            box-sizing: border-box;
+            padding-left: 1rem;
+        }
+
+        .area__li{
+            list-style-position: inside;
+            list-style-type: square;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+    </style>
 </head>
 <body>
-    
+    <span class="area">
+        <h1 class="area__header">Program działa w konsoli!</h1>
+        <p class="area__paragraph">
+            Do funkcji banku można jedynie dostać się za pomocą konsoli. Dostępne funkcje to: register(), login(), logout(), transfer() i credit(). Dwie ostatnie funkcje są dostępne tylko po zalogowaniu. Lista z opisami: 
+        </p>
+        <ul class="area__ul">
+            <li class="area__li">
+                Register() - bez tej funkcji nie działa każda inna. Aby móc się zalogować trzeba najpierw się zarejestrować. Należy wpisać imię, drugie imię (opcjonalnie), nazwisko, email oraz hasło. Saldo konta zostanie ustawione na 0. Po rejestracji nie zostaniesz zalogowany automatycznie. Funkcja rejestracji nie ma ograniczeń. Można rejestrować się dowolną liczbę razy.
+            </li>
+            <li class="area__li">
+                Login() - z tej funkcji można skorzystać jeśli przedtem użytkownik się nie zalogować. Należy wpisać adres email oraz hasło. Jeśli wprowadzone dane są zgodne z tymi wprowadzonymi przy rejestracji, to użytkownik się zaloguje. Skorzystanie z funkcji bez uprzedniej rejestracji jest możliwe, jednak wprowadzone dane nigdy nie będą prawidłowe. 
+            </li>
+            <li class="area__li">
+                Logout() - z tej funkcji można skorzystać jeśli przedtem użytkownik się zalogował. Wylogowuje ona użytkownika.
+            </li>
+            <li class="area__li">
+                Transfer() - funkcja jest dostępna dopiero po zalogowaniu. Służy ona do przesyłania pieniędzy na konto innego użytkownika. Należy wpisać numer konta, tytuł i kwotę, a następnie potwierdzić płatność poprzez wpisanie PINu. Wpisana kwota może być dowolna (nawet ujemna), jednak od salda konta zostanie odjęta wartość bezwzględna kwoty.
+            </li>
+            <li class="area__li">
+                Credit() - funkcja jest dostępna dopiero po zalogowaniu. Służy do pobierania pieniędzy na konto użytkownika. Najpierw należy wpisać swój zarobek. Jeśli zarobek będzie akceptowalny, to program poprosi o powód kredytu i kwotę. Wpisana kwota może być dowolna. Program poprosi potem o wpisanie PINu.
+            </li>
+        </ul>
+        <p class="area__paragraph">
+            Oczywiście program nie działa na telefonach.
+        </p>
+    </span>
     <script src="./script.js"></script>
 </body>
 </html>
