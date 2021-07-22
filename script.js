@@ -1,6 +1,6 @@
 'use strict'
 
-var permission = 0, client;
+var permission = 0, client = {};
 
 function register(){
     alert("Rozpoczyna się procedura rejestracji. ");
@@ -12,16 +12,20 @@ function register(){
     var password = prompt("Wprowadź nowe hasło");
 
     alert("Rejestracja przebiegła pomyślnie. ");
+    client.firstName = firstName;
+    client.secondName = secondName;
+    client.surname = surname;
+    client.email = email;
+    client.password = password;
+    client.balance = 0;
 
-    return {
-        firstName: firstName,
-        secondName: secondName,
-        surname: surname,
-        email: email,
-        password: password,
-        balance: 0,
-    }
+    return;
 }
+
+function debtReminder(){
+    if(client.balance < 0)
+        alert(`Uwaga! Jesteś dłużnikiem. Wisisz mi ${Math.abs(client.balance)}. Spłać albo będziesz miał kłopoty.`);
+};
 
 function login(){
     if(permission === 1){
@@ -71,19 +75,61 @@ function transfer(){
     client.balance = client.balance - amount;
     alert("Pomyślnie dokonano przelewu! ");
     
-    if(client.balance < 0)
-        alert(`Uwaga! Jesteś dłużnikiem. Wisisz mi ${Math.abs(client.balance)}. Spłać albo będziesz miał kłopoty.`);
+    debtReminder();
     return;
 }
 
-alert("Witaj w banku! Za chwilę rozpocznie się procedura rejestracji. "); 
-client = register();
-alert("Zaloguj się!");
-login(); 
-alert("Dokonaj przelewu! ");
-transfer();
-alert("No to się zalogowałeś. ");
-logout();
+function credit(){
+    if(permission === 0){
+        alert("Odmowa dostępu. ");
+        return;
+    }
+
+    var revenue = Number(prompt("Ile zarabiasz?"));
+    
+    if(revenue < 500)
+    {
+        alert("Za mało zarabiasz. ");
+        return;
+    }
+    
+    if(revenue > 10000)
+    {
+        alert("Przepraszamy, ale ta usługa obecnie nie jest dostępna.");
+        return;
+    }
+    
+    var amount = Number(prompt("Ile chcesz dostać?"));
+    var description = prompt("Na co chcesz przelew?");
+    
+    if(amount > 0 || amount){}else
+    {
+        alert("Wprowadzona kwota jest nieprawidłowa.");
+        return;
+    }
+
+    if(confirm(`Opis: ${description}, Kwota: ${amount}.`) === false){
+        alert("Kredyt anulowano.");
+        return;
+    }
+
+    client.balance = client.balance + amount;
+    alert(`Dokonano kredytu na ${amount}. Pamiętaj by go spłacić w czasie. Obecnie saldo konta wynosi ${client.balance}.`);
+    debtReminder();
+    return;
+
+}
+
+// alert("Witaj w banku! Za chwilę rozpocznie się procedura rejestracji. "); 
+// client = register();
+// alert("Zaloguj się!");
+// login(); 
+// alert("Dokonaj przelewu! ");
+// transfer();
+// alert("Dokonaj kredytu. ");
+// credit();
+// alert("No to się zalogowałeś. ");
+// logout();
 
 
 
